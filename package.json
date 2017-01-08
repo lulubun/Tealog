@@ -1,0 +1,20 @@
+{
+  "name": "TeaLog MVP",
+  "version": "0.0.1",
+  "description": "TeaLog App to record tasting notes",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "mocha": "^3.2.0"
+  },
+  "keywords": [
+    "node",
+    "hyperdev",
+    "express"
+  ],
+  "license": "MIT"
+}
