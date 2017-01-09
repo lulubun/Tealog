@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 describe('get root', () => {
 	it('it should show hellow world', (done) => {
 		chai.request(server)
-		.get('/index.html')
+		.get('/index')
 		.end((err, res) => {
 			res.should.have.status(200);
 			done();
