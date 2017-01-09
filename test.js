@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 
 const should = chai.should();
 
@@ -13,9 +13,13 @@ chai.use(chaiHttp);
 describe('get root', () => {
 	it('it should show hellow world', (done) => {
 		chai.request(server)
-			.get('/')
-	})	
-})
+		.get('/index')
+		.end((err, res) => {
+			res.should.have.status(200);
+			done();
+		});
+	});	
+});
 /*
 function tearDownDb() {
     console.warn('Deleting database');
