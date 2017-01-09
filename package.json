@@ -1,5 +1,5 @@
 {
-  "name": "TeaLog MVP",
+  "name": "TeaLogMVP",
   "version": "0.0.1",
   "description": "TeaLog App to record tasting notes",
   "main": "server.js",

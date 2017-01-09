@@ -5,18 +5,17 @@ const chaiHttp = require('chai-http');
 const should = chai.should();
 
 //const {Log} = require('../models');
-/*const {runServer, app, closeServer} = require('../server');
+const app = require('../server');
 //const {TEST_DATABASE_URL} = require('../config');
-*/
+
 chai.use(chaiHttp);
 
 describe('get root', () => {
-	it('it should show hellow world', (done) => {
-		chai.request(server)
-		.get('/index')
-		.end((err, res) => {
+	it('it get a 200 status and html', () => {
+		return chai.request(app)
+		.get('/')
+		.then(function(res) {
 			res.should.have.status(200);
-			done();
 		});
 	});	
 });
