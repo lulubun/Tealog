@@ -5,6 +5,12 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
 	res.json('hello world');
 });
+app.get('/aficionado', (req, res) => {
+	res.json('hello world');
+});
+app.get('/newlog', (req, res) => {
+	res.json('hello world');
+});
 app.listen(process.env.PORT || 8080);
 
 module.exports = app;

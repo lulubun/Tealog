@@ -19,6 +19,26 @@ describe('get root', () => {
 		});
 	});	
 });
+
+describe('get log page', () => {
+  it('it get a 200 status and html', () => {
+    return chai.request(app)
+    .get('/aficionado')
+    .then(function(res) {
+      res.should.have.status(200);
+    });
+  }); 
+});
+
+describe('get new log page', () => {
+  it('it get a 200 status and html', () => {
+    return chai.request(app)
+    .get('/newlog')
+    .then(function(res) {
+      res.should.have.status(200);
+    });
+  }); 
+});
 /*
 function tearDownDb() {
     console.warn('Deleting database');
