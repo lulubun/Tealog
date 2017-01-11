@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const should = chai.should();
 
-const {Log} = require('../models');
+const {Logs} = require('../models');
 const app = require('../server');
 //const {TEST_DATABASE_URL} = require('../config');
 
@@ -28,6 +28,33 @@ describe('get log page', () => {
       res.should.have.status(200);
     });
   }); 
+
+  it('should return all available logs with the right fields', () => {
+    let resLogs;
+    return chai.request(app)
+      .get('/aficionado')
+      .then(function(res) {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('array');
+        res.body.forEach(function(aficionado) {
+          aficionado.should.be.an('object');
+          aficionado.should.include.keys(
+//            'id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes')
+        });
+        resLogs = res.body[0];
+        return Logs.findById(resLogs.id);
+      })
+      .then(function(aficionado) {
+        resLogs.id.should
+
+
+
+
+
+        
+      })  
+  })
 });
 
 describe('get new log page', () => {
