@@ -39,9 +39,10 @@ describe('get log page', () => {
         res.body.should.be.a('array');
         res.body.forEach(function(aficionado) {
           aficionado.should.be.an('object');
-          //aficionado.should.include.keys(
-//            'id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes')
+          aficionado.should.include.keys(
+                      'id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes')
         });
+          aficionado.additions.should.include.keys('cream',)
         resLogs = res.body[0];
         return Logs.findById(resLogs.id);
       })

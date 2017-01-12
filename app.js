@@ -2,7 +2,7 @@ var STARTER_LOGS = {
     "initialLogs": [
         {
         	"teaName": "Valentines",
-			"date": 1470011976609,
+			"date": ,
 			"vendor": "adagio tea",
 			"teaType": "Flavored black",
 			"amountUsed": "3 tsp",

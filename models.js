@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const logSchema = mongoose.Schema({
+const tastingsSchema = mongoose.Schema({
   teaName: {type: String, required: true},
   date: {type: Date, default: Date.now},
   vendor: String,
   teaType: {
-    teaColor: String,
+    teaColor: Array,
     flavored: Boolean
   },
   amountUsed: String,
@@ -25,23 +25,23 @@ const logSchema = mongoose.Schema({
   notes: String
 });
 
-logSchema.methods.apiRepr = function() {
+tastingsSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     teaName: this.teaName,
     date: this.date,
     vendor: this.vendor,
-    teaType.teaColor: this.teaType.teaColor,
-    teaType.flavored: this.teaType.flavored,
+    teaColorTeaType: this.teaType.teaColor,
+    flavoredTeaType: this.teaType.flavored,
     amountUsed: this.amountUsed,
     waterUsed: this.waterUsed,
     brewTemp: this.brewTemp,
     steepingTime: this.steepingTime,
-    additions.cream: this.additions.cream,
-    additions.sugar: this.additions.sugar,
-    additions.honey: this.additions.honey,
-    additions.lemon: this.additions.lemon,
-    additions.other: this.additions.other,
+    creamAdditions: this.additions.cream,
+    sugarAdditions: this.additions.sugar,
+    honeyAdditions: this.additions.honey,
+    lemonAdditions: this.additions.lemon,
+    otherAdditions: this.additions.other,
     aroma: this.aroma,
     taste: this.taste,
     stars: this.stars,
@@ -49,6 +49,6 @@ logSchema.methods.apiRepr = function() {
   };
 }
 
-const Logs = mongoose.model('Logs', logSchema);
+const Tasting = mongoose.model('Tasting', tastingsSchema);
 
-module.exports = {Logs};
+module.exports = {Tasting};
