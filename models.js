@@ -14,7 +14,7 @@ const tastingsSchema = mongoose.Schema({
   steepingTime: String,
   additions: {
         cream: Boolean,
-        sugar: String,
+        sugar: Boolean,
         honey: Boolean,
         lemon: Boolean,
         other: String

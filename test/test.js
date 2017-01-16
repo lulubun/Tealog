@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 
 const should = chai.should();
 
-const {Logs} = require('../models');
-const app = require('../server');
-//const {TEST_DATABASE_URL} = require('../config');
+const {Tasting} = require('../models');
+const {runServer, app, closeServer} = require('../server');
+const {TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
+
 
 describe('get root', () => {
 	it('it get a 200 status and html', () => {
@@ -20,7 +21,7 @@ describe('get root', () => {
 	});	
 });
 
-describe('get log page', () => {
+describe('get aficionado page', () => {
   it('it get a 200 status and html', () => {
     return chai.request(app)
     .get('/aficionado')
@@ -29,8 +30,8 @@ describe('get log page', () => {
     });
   }); 
 
-  it('should return all available logs with the right fields', () => {
-    let resLogs;
+  it('should return all available entries with the right fields', () => {
+    let resTasting;
     return chai.request(app)
       .get('/aficionado')
       .then(function(res) {
@@ -42,12 +43,13 @@ describe('get log page', () => {
           aficionado.should.include.keys(
                       'id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes')
         });
-          aficionado.additions.should.include.keys('cream',)
-        resLogs = res.body[0];
-        return Logs.findById(resLogs.id);
+          aficionado.teaType.should.include.keys('teaColor', 'flavored')
+          aficionado.additions.should.include.keys('cream', 'sugar', 'honey', 'lemon', 'other')
+        resTasting = res.body[0];
+        return Tasting.findById(resLogs.id);
       })
       .then(function(aficionado) {
-        resLogs.id.should
+        resTasting.id.should
 
 
 
@@ -58,22 +60,22 @@ describe('get log page', () => {
   })
 });
 
-describe('get new log page', () => {
+describe('get new entry page', () => {
   it('it get a 200 status and html', () => {
     return chai.request(app)
-    .get('/newlog')
+    .get('/newentry')
     .then(function(res) {
       res.should.have.status(200);
     });
   }); 
 });
-/*
+
 function tearDownDb() {
     console.warn('Deleting database');
     return mongoose.connection.dropDatabase();
 }
 
-describe('TeaLog API resource', function() {
+describe('Tasting API resource', function() {
 
   // we need each of these hook functions to return a promise
   // otherwise we'd need to call a `done` callback. `runServer`,
@@ -92,25 +94,14 @@ describe('TeaLog API resource', function() {
   })
   describe('GET endpoint', function() {
 
-    it('should return all existing logs', function() {
-      // strategy:
-      //    1. get back all restaurants returned by by GET request to `/restaurants`
-      //    2. prove res has right status, data type
-      //    3. prove the number of restaurants we got back is equal to number
-      //       in db.
-      //
-      // need to have access to mutate and access `res` across
-      // `.then()` calls below, so declare it here so can modify in place
+    it('should return all existing entries', function() {
       let res;
       return chai.request(app)
-        .get('/userlog')
+        .get('/aficionado')
         .then(function(_res) {
-          // so subsequent .then blocks can access resp obj.
           res = _res;
           res.should.have.status(200);
-          // otherwise our db seeding didn't work
-          res.body.should.have.length.of.at.least(1);
-          return TeaLog.count();
+          return Tasting.count();
         })
         .then(function(count) {
           res.body.should.have.length.of(count);
@@ -118,66 +109,83 @@ describe('TeaLog API resource', function() {
     });
 
 
-    it('should return userlog with right fields', function() {
+    it('should return Tasting with right fields', function() {
       // Strategy: Get back all restaurants, and ensure they have expected keys
 
-      let resBlogPost;
+      let resTasting;
       return chai.request(app)
-        .get('/userlog')
+        .get('/aficionado')
         .then(function(res) {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('array');
-          res.body.should.have.length.of.at.least(1);
 
-          res.body.forEach(function(userlog) {
-            userlog.should.be.an('object');
-            userlog.should.include.keys(
-              'id', 'title', 'content', 'author');
+          res.body.forEach(function(aficionado) {
+            aficionado.should.be.an('object');
+            aficionado.should.include.keys(
+              'id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes');
+            aficionado.teaType.should.include.keys('teaColor', 'flavored')
+            aficionado.additions.should.include.keys('cream', 'sugar', 'honey', 'lemon', 'other')
           });
-          resBlogPost = res.body[0];
-          return TeaLog.findById(resBlogPost.id);
+          resTasting = res.body[0];
+          return Tasting.findById(resTasting.id);
         })
-        .then(function(userlog) {
+        .then(function(aficionado) {
           //removed post.from () may need to undo
-          resBlogPost.id.should.equal(userlog.id);
-          resBlogPost.title.should.equal(userlog.title);
-          resBlogPost.content.should.equal(userlog.content);
-          resBlogPost.author.should.equal(userlog.author.firstName + " " + userlog.author.lastName);
+          //resTasting.id.should.equal(aficionado.id);
+          //resTasting.teaName.should.equal(aficionado.teaName);
+          //resTasting.date.should.equal(aficionado.date);
+          //resTasting.author.should.equal(aficionado.teaType.teaColor + " " + aficionado.teaType.flavor);
         });
     });
   });
 
   describe('POST endpoint', function() {
-    // strategy: make a POST request with data,
-    // then prove that the userlog we get back has
-    // right keys, and that `id` is there (which means
-    // the data was inserted into db)
-    it('should add a new userlog', function() {
+    it('should add a new entry', function() {
 
-      const newBlogPost = generateBlogPostData();
+      const newTasting = generateTastingData();
 
       return chai.request(app)
-        .post('/userlog')
-        .send(newBlogPost)
+        .post('/aficionado')
+        .send(newTasting)
         .then(function(res) {
           res.should.have.status(201);
           res.should.be.json;
           res.body.should.be.a('object');
           res.body.should.include.keys(
-            'id', 'title', 'content', 'author');
-          // cause Mongo should have created id on insertion
+              'id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes');
+            res.body.teaType.should.include.keys('teaColor', 'flavored')
+            res.body.additions.should.include.keys('cream', 'sugar', 'honey', 'lemon', 'other')
+          });
           res.body.id.should.not.be.null;
-          res.body.title.should.equal(newBlogPost.title);
-          res.body.content.should.equal(newBlogPost.content);
-          res.body.author.should.equal(newBlogPost.author.firstName + " " + newBlogPost.author.lastName);          
-          return TeaLog.findById(res.body.id);
+          res.body.teaName.should.equal(newTasting.teaName);
+          res.body.date.should.equal(newTasting.date);
+          res.body.vendor.should.equal(newTasting.vendor);
+          res.body.teaType.teaColor.should.equal(newTasting.teaType.teaColor);
+          res.body.teaType.flavor.should.equal(newTasting.teaType.flavor);
+          res.body.waterUsed.should.equal(newTasting.waterUsed);  
+          res.body.brewTemp.should.equal(newTasting.brewTemp);        
+          res.body.steepingTime.should.equal(newTasting.steepingTime);
+          res.body.additions.cream.should.equal(newTasting.additions.cream);
+          res.body.additions.sugar.should.equal(newTasting.additions.sugar);
+          res.body.additions.honey.should.equal(newTasting.additions.honey);
+          res.body.additions.lemon.should.equal(newTasting.additions.lemon);
+          res.body.additions.other.should.equal(newTasting.additions.other);
+          res.body.aroma.should.equal(newTasting.aroma);
+          res.body.taste.should.equal(newTasting.taste);
+          res.body.stars.should.equal(newTasting.stars);
+          res.body.notes.should.equal(newTasting.notes);
+          return Tasting.findById(res.body.id);
         })
-        .then(function(userlog) {
-          userlog.title.should.equal(newBlogPost.title);
-          userlog.content.should.equal(newBlogPost.content);
-          userlog.author.firstName.should.equal(newBlogPost.author.firstName);
-          userlog.author.lastName.should.equal(newBlogPost.author.lastName);
+
+    //stopped here on Thursday Night
+
+        .then(function(aficionado) {
+          aficionado.teaName.should.equal(newTasting.teaName);
+          aficionado.date.should.equal(newTasting.date);
+          aficionado.vendor.should.equal(newTasting.vendor);
+          aficionado.teaType.teaColor.should.equal(newTasting.teaType.teaColor);
+          aficionado.teaType.flavor.should.equal(newTasting.teaType.flavor);
 
         });
     });
@@ -186,60 +194,60 @@ describe('TeaLog API resource', function() {
   describe('PUT endpoint', function() {
 
     // strategy:
-    //  1. Get an existing userlog from db
-    //  2. Make a PUT request to update that userlog
-    //  3. Prove userlog returned by request contains data we sent
-    //  4. Prove userlog in db is correctly updated
+    //  1. Get an existing aficionado from db
+    //  2. Make a PUT request to update that aficionado
+    //  3. Prove aficionado returned by request contains data we sent
+    //  4. Prove aficionado in db is correctly updated
     it('should update fields you send over', function() {
       const updateData = {
-        title: 'fofofofofofofof',
-        content: 'futuristic fusion'
+        teaName: 'fofofofofofofof',
+        date: 'futuristic fusion'
       };
 
-      return TeaLog
+      return Tasting
         .findOne()
         .exec()
-        .then(function(userlog) {
-          updateData.id = userlog.id;
+        .then(function(aficionado) {
+          updateData.id = aficionado.id;
 
           // make request then inspect it to make sure it reflects
           // data we sent
           return chai.request(app)
-            .put(`/userlog/${userlog.id}`)
+            .put(`/aficionado/${aficionado.id}`)
             .send(updateData);
         })
         .then(function(res) {
           res.should.have.status(201);
 
-          return TeaLog.findById(updateData.id).exec();
+          return Tasting.findById(updateData.id).exec();
         })
-        .then(function(userlog) {
-          userlog.title.should.equal(updateData.title);
-          userlog.content.should.equal(updateData.content);
+        .then(function(aficionado) {
+          aficionado.teaName.should.equal(updateData.teaName);
+          aficionado.date.should.equal(updateData.date);
         });
       });
   });
 
   describe('DELETE endpoint', function() {
     // strategy:
-    //  1. get a userlog
-    //  2. make a DELETE request for that userlog's id
+    //  1. get a aficionado
+    //  2. make a DELETE request for that aficionado's id
     //  3. assert that response has right status code
-    //  4. prove that userlog with the id doesn't exist in db anymore
-    it('delete a userlog by id', function() {
+    //  4. prove that aficionado with the id doesn't exist in db anymore
+    it('delete a aficionado by id', function() {
 
-      let userlog;
+      let aficionado;
 
-      return TeaLog
+      return Tasting
         .findOne()
         .exec()
         .then(function(_blog) {
-          userlog = _blog;
-          return chai.request(app).delete(`/userlog/${userlog.id}`);
+          aficionado = _blog;
+          return chai.request(app).delete(`/aficionado/${aficionado.id}`);
         })
         .then(function(res) {
           res.should.have.status(201);
-          return TeaLog.findById(userlog.id).exec();
+          return Tasting.findById(aficionado.id).exec();
         })
         .then(function(_blog) {
           // when a variable's value is null, chaining `should`

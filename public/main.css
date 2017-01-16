@@ -1,0 +1,70 @@
+* {
+	font-family: 'Cabin', sans-serif;
+	box-sizing: border-box;
+}
+
+.form-entries {
+	margin-left: 50px;
+	display: inline-block;
+}
+
+.entry {
+	font-size: 17px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+.selected {
+	font-size: 12px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+div.stars {
+  width: 200px;
+  display: inline;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+input.star { 
+	display: none; 
+}
+
+label.star {
+  float: center;
+  padding: 10px;
+  font-size: 27px;
+  color: black;
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black; 
+  transition: all .2s;
+}
+
+input.star:checked ~ label.star:before {
+  content: "\2605";
+  color: white;
+  -webkit-text-fill-color: #FD4; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 0px;
+  font-family: FontAwesome;
+  transition: all .25s;
+}
+
+input.star-5:checked ~ label.star:before {
+  color: white;
+  -webkit-text-fill-color: #FE7; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 0px;
+  text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked ~ label.star:before { 
+	color: #F62; 
+	-webkit-text-fill-color: #F62;
+	-webkit-text-stroke-width: 0px;
+}
+
+label.star:before {
+  content: "\2605";
+  font-family: FontAwesome;
+}
