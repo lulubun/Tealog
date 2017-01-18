@@ -16,31 +16,31 @@ app.get('/', (req, res) => {
 	res.json('hello world');
 });
 
-app.get('/aficionado', (req, res) => {
-  Tasting
+app.get('/entries', (req, res) => {
+  Entry
     .find()
     .exec()
-    .then(aficionado => {
-      res.json(aficionado.map(taste => taste.apiRepr()));
+    .then(entries => {
+      res.json(entry.map(entry => entry.apiRepr()));
     })
     .catch(err => {
       console.error(err);
-      res.status(500).json({error: 'something went terribly wrong'});
+      res.status(500).json({error: 'something went wrong'});
     });
 });
 
-app.get('/aficionado/:id', (req, res) => {
-  Tasting
+app.get('/entries/:id', (req, res) => {
+  Entry
     .findById(req.params.id)
     .exec()
-    .then(taste => res.json(taste.apiRepr()))
+    .then(entry => res.json(entry.apiRepr()))
     .catch(err => {
       console.error(err);
-      res.status(500).json({error: 'something went horribly awry'});
+      res.status(500).json({error: 'something went wrong'});
     });
 });
 
-app.post('/aficionado', (req, res) => {
+app.post('/entries', (req, res) => {
   const requiredFields = ['teaName', 'date'];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
@@ -68,7 +68,7 @@ app.post('/aficionado', (req, res) => {
   var notes = req.body.notes ? req.body.notes : '';
 
 
-  Tasting
+  Entry
     .create({
     	teaName: req.body.teaName,
     	date: req.body.date,
@@ -101,8 +101,8 @@ app.post('/aficionado', (req, res) => {
 
 });
 
-app.delete('/aficionado/:id', (req, res) => {
-  Tasting
+app.delete('/entries/:id', (req, res) => {
+  Entry
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
@@ -115,7 +115,7 @@ app.delete('/aficionado/:id', (req, res) => {
 });
 
 
-app.put('/aficionado/:id', (req, res) => {
+app.put('/entries/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
@@ -130,20 +130,20 @@ app.put('/aficionado/:id', (req, res) => {
     }
   });
 
-  Tasting
+  Entry
     .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
     .exec()
-    .then(updatedPost => res.status(201).json(updatedPost.apiRepr()))
+    .then(updatedEntry => res.status(201).json(updatedEntry.apiRepr()))
     .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
 
 
 app.delete('/:id', (req, res) => {
-  Tasting
+  Entry
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
-      console.log(`Deleted tasting with id \`${req.params.ID}\``);
+      console.log(`Deleted entry with id \`${req.params.ID}\``);
       res.status(201).end();
     });
 });
