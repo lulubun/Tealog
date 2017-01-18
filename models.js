@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const tastingsSchema = mongoose.Schema({
-  teaName: {type: String, required: true},
   date: {type: Date, default: Date.now},
+  teaName: {type: String, required: true},
   vendor: String,
   teaType: {
     teaColor: Array,

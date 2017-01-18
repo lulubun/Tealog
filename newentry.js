@@ -16,7 +16,7 @@ function recordEntry() {
   	var otherText = $('#other-text'.val());
   	var aroma = $('#aroma'.val());
   	var taste = $('#taste'.val());
-  	//var rating =
+  	var rating = $('input[name=star]:checked', '#rating').val(); 
   	var notes = $('#notes'.val());
 
 
