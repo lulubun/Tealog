@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const {DATABASE_URL, PORT} = require('./config');
-const {Tasting}= require('./models');
+const {Entries}= require('./models');
 
 const app = express();
 
@@ -93,7 +93,7 @@ app.post('/entries', (req, res) => {
     	stars: stars,
     	notes: notes
     })
-    .then(taste => res.status(201).json(taste.apiRepr()))
+    .then(entry => res.status(201).json(entry.apiRepr()))
     .catch(err => {
         console.error(err);
         res.status(500).json({error: 'Something went wrong'});
@@ -135,22 +135,6 @@ app.put('/entries/:id', (req, res) => {
     .exec()
     .then(updatedEntry => res.status(201).json(updatedEntry.apiRepr()))
     .catch(err => res.status(500).json({message: 'Something went wrong'}));
-});
-
-
-app.delete('/:id', (req, res) => {
-  Entry
-    .findByIdAndRemove(req.params.id)
-    .exec()
-    .then(() => {
-      console.log(`Deleted entry with id \`${req.params.ID}\``);
-      res.status(201).end();
-    });
-});
-
-
-app.use('*', function(req, res) {
-  res.status(404).json({message: 'Not Found'});
 });
 
 app.get('/newentry', (req, res) => {

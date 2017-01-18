@@ -1,24 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width">
-  	<link rel="stylesheet" type="text/css" href="main.css">
-  	<link rel="stylesheet" type="text/css" href="float_grid.css">
-  	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-	<title>Aficionado Tea Log Page</title>
-</head>
-<body>
-<main>
-<h1>Aficionado Tea Log Page</h1>
-<form action="tea log form", name="teaLog" method="get">
-	<div class="form-entries">
-		<div class="entry date">Date
-			<input type="text" name="date" id="date">
-		</div>
-		<div class="entry tea-name" > Tea Name
-			<input id="tea-name" type="text" name="tea name">
-		</div>
+function createNewEntry(){
+
+}
+
+function getAllEntries(callback) {
+	var entryData = [];
+	$.getJSON(DATABASE_URL, callback)
+}
+
+// this function stays the same when we connect
+// to real API later
+function displayAllEntries(data) {
+	var allEntries = [];
+    if (data) {
+    	data.forEach(function(item) {
+    		var oneEntry = '';
+    		oneEntry += '<p>' + item.teaName + '</p>';
+    		allEntries.push(oneEntry);
+    	});
+    	$('.entries_list_space').html(allEntries);
+    }
+}
+
+// this function can stay the same even when we
+// are connecting to real API
+function getAndDisplayAllEntries() {
+    getAllEntries(displayAllEntries);
+}
+
+$(function() {
+    getAndDisplayAllEntries();
+})
+
+function startEntryForm() {
+	$('.entryButton').click(function(event) {
+		var newEntryForm = '<h1>New Tea Tasting Entry</h1>' +
+							'<form action="tea log form", name="teaLog" method="get">' +
+							'<div class="form-entries">' +
+							'<div class="entry date">Date' +
+							'<input type="text" name="date" id="date">' +
+							'</div>' +
+							'<div class="entry tea-name" > Tea Name' +
+							'<input id="tea-name" type="text" name="tea name">' +
+							'</div>' +
+							//Is this right???!!!!
 		<div class="entry vendor">Vendor
 			<input type="text" name="vendor" id="vendor">
 		</div>
@@ -77,9 +101,6 @@
 		</div>	
 	</div>
 </form>
-</main>
-
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-<script src="newentry.js" type="text/javascript"></script>
-</body>
-</html>
+		$('.new_entry_form_space').html(newEntryForm)
+	})
+};
