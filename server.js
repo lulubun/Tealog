@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const {DATABASE_URL, PORT} = require('./config');
-const {Entries}= require('./models');
+const {Entry}= require('./models');
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.get('/entries', (req, res) => {
     .find()
     .exec()
     .then(entries => {
-      res.json(entry.map(entry => entry.apiRepr()));
+      res.json(entries.map(entries => entries.apiRepr()));
     })
     .catch(err => {
       console.error(err);
@@ -33,7 +33,7 @@ app.get('/entries/:id', (req, res) => {
   Entry
     .findById(req.params.id)
     .exec()
-    .then(entry => res.json(entry.apiRepr()))
+    .then(entries => res.json(entries.apiRepr()))
     .catch(err => {
       console.error(err);
       res.status(500).json({error: 'something went wrong'});
@@ -93,7 +93,7 @@ app.post('/entries', (req, res) => {
     	stars: stars,
     	notes: notes
     })
-    .then(entry => res.status(201).json(entry.apiRepr()))
+    .then(entries => res.status(201).json(entries.apiRepr()))
     .catch(err => {
         console.error(err);
         res.status(500).json({error: 'Something went wrong'});

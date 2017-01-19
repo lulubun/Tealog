@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const tastingsSchema = mongoose.Schema({
+const entrySchema = mongoose.Schema({
   date: {type: Date, default: Date.now},
   teaName: {type: String, required: true},
   vendor: String,
@@ -25,7 +25,7 @@ const tastingsSchema = mongoose.Schema({
   notes: String
 });
 
-tastingsSchema.methods.apiRepr = function() {
+entrySchema.methods.apiRepr = function() {
   return {
     id: this._id,
     teaName: this.teaName,
@@ -49,6 +49,6 @@ tastingsSchema.methods.apiRepr = function() {
   };
 }
 
-const Tasting = mongoose.model('Tasting', tastingsSchema);
+const Entry = mongoose.model('Entry', entrySchema);
 
-module.exports = {Tasting};
+module.exports = {Entry};
