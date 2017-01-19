@@ -5,7 +5,7 @@ const entrySchema = mongoose.Schema({
   teaName: {type: String, required: true},
   vendor: String,
   teaType: {
-    teaColor: Array,
+    teaColor: String,
     flavored: Boolean
   },
   amountUsed: String,

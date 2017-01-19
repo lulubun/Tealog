@@ -1,7 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-
 const should = chai.should();
 
 const {Entry} = require('../models');
@@ -10,6 +9,57 @@ const {TEST_DATABASE_URL} = require('../config');
 
 chai.use(chaiHttp);
 
+function addStarterData() {
+  const seedData = [{
+    date: 'Jan 1, 2020',
+    teaName: 'Tester Tea',
+    vendor: 'Tea Company',
+    teaType: {
+      teaColor: 'Black',
+      flavored: true
+    },
+    amountUsed: '1 tsp',
+    waterUsed: '1 cup',
+    brewTemp: '212',
+    steepingTime: '4 min',
+    additions: {
+      cream: true,
+      sugar: true,
+      honey: false,
+      lemon: false,
+      other: ''
+    },
+    aroma: 'fruity',
+    taste: 'sweet',
+    stars: 5,
+    notes: ''
+  },
+  {
+    date: 'Jan 2, 2020',
+    teaName: 'Tester Tea Two',
+    vendor: 'Tea Company',
+    teaType: {
+      teaColor: 'Black',
+      flavored: true
+    },
+    amountUsed: '1 tsp',
+    waterUsed: '1 cup',
+    brewTemp: '212',
+    steepingTime: '4 min',
+    additions: {
+      cream: true,
+      sugar: true,
+      honey: false,
+      lemon: false,
+      other: ''
+    },
+    aroma: 'fruity',
+    taste: 'sweet',
+    stars: 5,
+    notes: ''
+  }];
+  return Entry.insertMany(seedData);
+}
 
 describe('get root', () => {
 	it('should get a 200 status and html', () => {
@@ -21,44 +71,6 @@ describe('get root', () => {
 	});	
 });
 
-describe('get entries page', () => {
-  it('should return a 200 status and html', () => {
-    let res;
-    return chai.request(app)
-    .get('/entries')
-    .then(function(_res) {
-      res = _res;
-      res.should.have.status(200);
-      return Entry.count();
-    })
-    .then(function(count) {
-      res.body.entries.should.have.length.of(count);
-    });
-  }); 
-
-  it('should return all available entries with the right fields', () => {
-    let resEntries;
-    return chai.request(app)
-    .get('/entries')
-    .then(function(res) {
-      res.should.have.status(200);
-      res.should.be.json;
-      res.body.should.be.a('array');
-      res.body.forEach(function(entries) {
-        entries.should.be.an('object');
-        entries.should.include.keys('id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes');
-      });
-      entries.teaType.should.include.keys('teaColor', 'flavored');
-      entries.additions.should.include.keys('cream', 'sugar', 'honey', 'lemon', 'other');
-      resEntries = res.body[0];
-      return Entry.findById(resEntries.id);
-    })
-    .then(function(entries) {
-      resEntries.id.should.equal(entry.id);
-
-    })  
-  });
-});
 
 function tearDownDb() {
   console.warn('Deleting database');
@@ -68,6 +80,10 @@ function tearDownDb() {
 describe('Entry API resource', function() {
   before(function() {
     return runServer(TEST_DATABASE_URL);
+  });
+
+  beforeEach(function() {
+    return addStarterData();
   });
 
   afterEach(function() {
@@ -100,12 +116,10 @@ describe('Entry API resource', function() {
       .then(function(res) {
         res.should.have.status(200);
         res.should.be.json;
-        res.body.entries.should.be.a('array');
-        res.body.entries.forEach(function(entries) {
+        res.body.should.be.an('array');
+        res.body.entries.forEach(function(entry) {
           entry.should.be.an('object');
           entry.should.include.keys('id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes');
-          entry.teaType.should.include.keys('teaColor', 'flavored');
-          entry.additions.should.include.keys('cream', 'sugar', 'honey', 'lemon', 'other');
         });
         resEntries = res.body.entries[0];
         return Entry.findById(resEntries.id);
@@ -115,16 +129,11 @@ describe('Entry API resource', function() {
         resEntries.teaName.should.equal(entry.teaName);
         resEntries.date.should.equal(entry.date);
         resEntries.vendor.should.equal(entry.vendor);
-        resEntries.teaType.teaColor.should.equal(entry.teaType.teaColor);
-        resEntries.teaType.flavor.should.equal(entry.teaType.flavor);
+        resEntries.teaType.should.contain(entry.teaType.teaColor);
         resEntries.waterUsed.should.equal(entry.waterUsed);  
         resEntries.brewTemp.should.equal(entry.brewTemp);        
         resEntries.steepingTime.should.equal(entry.steepingTime);
-        resEntries.additions.cream.should.equal(entry.additions.cream);
-        resEntries.additions.sugar.should.equal(entry.additions.sugar);
-        resEntries.additions.honey.should.equal(entry.additions.honey);
-        resEntries.additions.lemon.should.equal(entry.additions.lemon);
-        resEntries.additions.other.should.equal(entry.additions.other);
+        resEntries.additions.should.contain(entry.additions.cream);
         resEntries.aroma.should.equal(entry.aroma);
         resEntries.taste.should.equal(entry.taste);
         resEntries.stars.should.equal(entry.stars);
@@ -135,7 +144,30 @@ describe('Entry API resource', function() {
 
   describe('POST endpoint', function() {
     it('should add a new entry', function() {
-      const newEntry = generateEntryData();
+      const newEntry = {
+        date: 'Jan 1, 2020',
+        teaName: 'Tester Tea',
+        vendor: 'Tea Company',
+        teaType: {
+          teaColor: 'Black',
+          flavored: true
+        },
+        amountUsed: '1 tsp',
+        waterUsed: '1 cup',
+        brewTemp: '212',
+        steepingTime: '4 min',
+        additions: {
+          cream: true,
+          sugar: true,
+          honey: false,
+          lemon: false,
+          other: ''
+        },
+        aroma: 'fruity',
+        taste: 'sweet',
+        stars: 5,
+        notes: ''
+      };
       return chai.request(app)
       .post('/entries')
       .send(newEntry)
@@ -143,23 +175,15 @@ describe('Entry API resource', function() {
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.include.keys('id', 'teaName', 'date', 'vendor', 'teaType', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes');
-        res.body.teaType.should.include.keys('teaColor', 'flavored');
-        res.body.additions.should.include.keys('cream', 'sugar', 'honey', 'lemon', 'other');
+        res.body.should.include.keys('id', 'teaName', 'date', 'vendor', 'amountUsed', 'waterUsed', 'brewTemp', 'steepingTime', 'additions', 'aroma', 'taste', 'stars', 'notes');
         res.body.id.should.not.be.null;
         res.body.teaName.should.equal(newEntry.teaName);
         res.body.date.should.equal(newEntry.date);
         res.body.vendor.should.equal(newEntry.vendor);
-        res.body.teaType.teaColor.should.equal(newEntry.teaType.teaColor);
-        res.body.teaType.flavor.should.equal(newEntry.teaType.flavor);
+        res.body.amountUsed.should.equal(newEntry.amountUsed);
         res.body.waterUsed.should.equal(newEntry.waterUsed);  
         res.body.brewTemp.should.equal(newEntry.brewTemp);        
         res.body.steepingTime.should.equal(newEntry.steepingTime);
-        res.body.additions.cream.should.equal(newEntry.additions.cream);
-        res.body.additions.sugar.should.equal(newEntry.additions.sugar);
-        res.body.additions.honey.should.equal(newEntry.additions.honey);
-        res.body.additions.lemon.should.equal(newEntry.additions.lemon);
-        res.body.additions.other.should.equal(newEntry.additions.other);
         res.body.aroma.should.equal(newEntry.aroma);
         res.body.taste.should.equal(newEntry.taste);
         res.body.stars.should.equal(newEntry.stars);
@@ -170,8 +194,12 @@ describe('Entry API resource', function() {
         entry.teaName.should.equal(newEntry.teaName);
         entry.date.should.equal(newEntry.date);
         entry.vendor.should.equal(newEntry.vendor);
-        entry.teaType.teaColor.should.equal(newEntry.teaType.teaColor);
         entry.teaType.flavor.should.equal(newEntry.teaType.flavor);
+        entry.teaType.teaColor.should.equal(newEntry.teaType.teaColor);
+        entry.amountUsed.should.equal(newEntry.amountUsed);
+        entry.waterUsed.should.equal(newEntry.waterUsed);
+        entry.brewTemp.should.equal(newEntry.brewTemp);
+        entry.steepingTime.should.equal(newEntry.steepingTime);
       });
     });
   });
@@ -180,7 +208,7 @@ describe('Entry API resource', function() {
     it('should update fields you send over', function() {
       const updateData = {
         teaName: 'fofofofofofofof',
-        date: 'Jan 30, 2010'
+        vendor: 'a dude'
       };
       return Entry
       .findOne()
@@ -197,7 +225,7 @@ describe('Entry API resource', function() {
       })
       .then(function(entries) {
         entries.teaName.should.equal(updateData.teaName);
-        entries.date.should.equal(updateData.date);
+        entries.vendor.should.equal(updateData.vendor)
       });
     });
   });
