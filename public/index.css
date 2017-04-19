@@ -1,0 +1,83 @@
+* {
+}
+
+.topPage {
+	background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
+  background-size: cover;
+	padding-bottom: 70px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+}
+
+#pourVid {
+	padding-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	align-items: center;
+	height: 500px;
+	padding-right: -5px;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+
+.Intro {
+	text-align: center;
+}
+
+#title {
+	font-family: 'Tangerine';
+}
+
+#info {
+	font-family: 'Lora';
+}
+
+a {
+	text-decoration: none;
+}
+
+a.buttonLink {
+	font-size: 50px;
+	-webkit-transition: font-size 0.5s; /* Safari 3.1 to 6.0 */
+    transition: font-size 0.5s;
+
+}
+
+a.buttonLink:link {
+	color: black;
+}
+
+a.buttonLink:visited {
+	color: black;
+}
+
+a.buttonLink:hover {
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	color: white;
+	font-size: 75px;
+	background-color: black;
+
+}
+
+.citation {
+	font-size: 10px;
+}
+
+.teaIcon {
+	height: 50px;
+	vertical-align: -75%;
+}
+
+.end {
+	font-weight: bold;
+}
+
+.bottomPage {
+	text-align: center;
+}
