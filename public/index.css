@@ -1,9 +1,19 @@
-* {
+body {
+	background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
+	background-size: cover;
+}
+
+@media (max-width: 650px) {
+	.Intro {
+		width: 100%;
+	}
+
+	#pourVid {
+		height: 10%;
+	}
 }
 
 .topPage {
-	background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
-  background-size: cover;
 	padding-bottom: 70px;
 	padding-left: 0px;
 	padding-right: 0px;
@@ -16,7 +26,7 @@
 	margin-left: auto;
 	display: block;
 	align-items: center;
-	height: 500px;
+	width: 100%;
 	padding-right: -5px;
 	margin-bottom: 30px;
 	overflow: hidden;
@@ -63,21 +73,4 @@ a.buttonLink:hover {
 	font-size: 75px;
 	background-color: black;
 
-}
-
-.citation {
-	font-size: 10px;
-}
-
-.teaIcon {
-	height: 50px;
-	vertical-align: -75%;
-}
-
-.end {
-	font-weight: bold;
-}
-
-.bottomPage {
-	text-align: center;
 }
