@@ -24,20 +24,20 @@ div.leftTab {
   width: 10%;
 	height: 100%;
 	text-align: center;
-	padding-top: 10px;
+	padding-top: 2%;
 }
 
 .writtenEntry {
-  padding-left: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 7px;
+  padding-left: 1%;
+  padding-bottom: 1%;
+  margin-bottom: 5%;
 }
 
 .form-entries {
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
   border-style: solid;
   border-width: 1px;
   border-radius: 5px;
@@ -47,7 +47,7 @@ div.leftTab {
 
 .border_scroll{
   align-content: center;
-  min-height: 40px;
+  min-height: 10%;
   width: 100%;
   filter: brightness(0%);
 }
@@ -61,10 +61,65 @@ h2 {
 }
 
 .teaset {
-  height: 150px;
-  float: right;
+  display: block;
+	margin-bottom: 20px;
+	float: right;
   padding-bottom: 40px;
 	padding-right: 30px;
+	width: 25%;
+	vertical-align: middle;
+	position: relative;
+}
+
+@media only screen and (max-width: 1050px) {
+	.teaset {
+		display: none;
+	}
+}
+
+
+@media only screen and (max-width: 640px) {
+
+	.firstTitle {
+		font-size: 25px;
+		width: 100%;
+	}
+
+	.dropbtn {
+		width: auto;
+	}
+
+	.entryButton {
+		width: auto;
+	}
+
+	.goTopButton {
+		width: auto;
+	}
+
+	.leftTab {
+		display: none;
+	}
+}
+
+@media (max-width: 360px) {
+	.teaset {
+		width: 10%;
+	}
+
+	/*.firstTitle {
+		font-size: 2px;
+		width: 100%;
+	}*/
+
+	.textOnly {
+		font-size: 2px;
+
+	}
+
+	.leftTab {
+		display: none;
+	}
 }
 
 .teasetSm {
@@ -74,15 +129,15 @@ h2 {
 }
 
 .firstTitle {
-	font-size: 150px;
+	font-size: 100px;
   display: block;
 	font-family: 'Tangerine';
-	border-bottom: 1px solid black;
 	vertical-align: middle;
 }
 
-.bigTitle{
-	font-size: 100px;
+.underline {
+	border-bottom: 1px solid black;
+	padding-bottom: 5px;
 }
 
 .entriesTitle {
@@ -248,20 +303,23 @@ button:hover, button:focus {
 }
 
 .dropbtn {
-	width: 120px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 	margin-bottom: 20px;
-	margin-left: 0px;
 }
 
 .entryButton {
-	width: 120px;
-	margin-left: 0px;
+	width: 98%;
+	margin-left: auto;
+	margin-right: auto;
 	margin-bottom: 20px;
 }
 
 .goTopButton {
-	width: 120px;
-	margin-left: 0px;
+	width: 98%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 input {
