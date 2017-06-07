@@ -1,11 +1,7 @@
-body {
-	background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
-	background-size: cover;
-}
-
 @media (max-width: 650px) {
 	.Intro {
 		width: 100%;
+		position: relative;
 	}
 
 	#pourVid {
@@ -13,23 +9,13 @@ body {
 	}
 }
 
-.topPage {
-	padding-bottom: 70px;
-	padding-left: 0px;
-	padding-right: 0px;
-	padding-top: 0px;
-}
-
 #pourVid {
-	padding-top: 20px;
-	margin-right: auto;
-	margin-left: auto;
+	margin: 0;
 	display: block;
-	align-items: center;
 	width: 100%;
-	padding-right: -5px;
-	margin-bottom: 30px;
-	overflow: hidden;
+	position: relative;
+	z-index: 0;
+	padding-left: -5;
 }
 
 .Intro {
@@ -38,39 +24,20 @@ body {
 
 #title {
 	font-family: 'Tangerine';
+	font-size: 100px;
 }
 
-#info {
+.info {
 	font-family: 'Lora';
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	color: white;
+	padding-left: 27%;
+	padding-top: 10%;
 }
 
 a {
 	text-decoration: none;
-}
-
-a.buttonLink {
-	font-size: 50px;
-	-webkit-transition: font-size 0.5s; /* Safari 3.1 to 6.0 */
-    transition: font-size 0.5s;
-
-}
-
-a.buttonLink:link {
-	color: black;
-}
-
-a.buttonLink:visited {
-	color: black;
-}
-
-a.buttonLink:hover {
-	padding-top: 10px;
-	padding-left: 10px;
-	padding-bottom: 10px;
-	padding-right: 10px;
-	border-radius: 10px;
-	color: white;
-	font-size: 75px;
-	background-color: black;
-
 }
