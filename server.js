@@ -2,6 +2,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const moment = require('moment');
+
 
 const {DATABASE_URL, PORT} = require('./config');
 const {Entry}= require('./models');
@@ -70,7 +72,7 @@ app.post('/entries', (req, res) => {
   Entry
     .create({
     	teaName: req.body.teaName,
-    	date: req.body.date,
+    	date: moment(req.body.date).format("ddd, MMM Do YYYY, h:mm a"),
     	vendor: vendor,
     	teaColorTeaType: teaColorTeaType,
     	flavoredTeaType: flavoredTeaType,
@@ -115,7 +117,7 @@ app.put('/entries/:id', (req, res) => {
 
   const updated = {};
   const updateableFields = ['teaName', 'date', 'vendor', 'teaColorTeaType', 'flavoredTeaType', 'creamAdditions', 'sugarAdditions', 'honeyAdditions', 'lemonAdditions', 'otherAdditions', 'aroma', 'taste', 'stars', 'notes'];
-  updateableFields.forEach(field => { 
+  updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
     }

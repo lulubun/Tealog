@@ -1,4 +1,5 @@
 var storeID = {};
+// var moment = require('moment');
 
 function dropList() {
     document.getElementById("myDropdown").classList.toggle("show");
@@ -24,7 +25,6 @@ function getAllEntries(callback) {
 }
 
 function displayAllEntries(data) {
-	console.log(data);
 	var allEntries = [];
     if (data) {
     	$('.entries_list_space').html('');
@@ -39,7 +39,9 @@ function displayAllEntries(data) {
     		//console.log(storeID[index]);
     		index++;
     		var numberDate = Date.parse(item.date);
+        console.log(numberDate);
     		var prettyDate = Date(numberDate);
+        console.log(prettyDate);
     		oneEntry +=
 				'<p>' + prettyDate + '</p>' +
 				'<p>Tea Name: ' + item.teaName + '</p>' +
@@ -181,6 +183,7 @@ function startEntryForm() {
 									'</div>' +
 									'<div class="submit">' +
 										'<button class="submitButton" type="button">Save Entry</button>' +
+                    '<button class="cancelButton" type="button">Cancel</button>' +
 									'</div>' +
 								'</div>' +
 							'</form>';

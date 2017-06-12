@@ -16,10 +16,19 @@
 	position: relative;
 	z-index: 0;
 	padding-left: -5;
+	opacity: 0.3;
 }
 
 .Intro {
 	text-align: center;
+	background: rgba(255,255,255,.5);
+	z-index: 10;
+	display: block;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 #title {
@@ -33,7 +42,7 @@
 	top: 0;
 	left: 0;
 	z-index: 1;
-	color: white;
+	color: black;
 	padding-left: 27%;
 	padding-top: 10%;
 }
