@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const entrySchema = mongoose.Schema({
-  date: {type: Date, default: Date.now},
+  date: String,
   teaName: {type: String, required: true},
   vendor: String,
   teaColorTeaType: String,

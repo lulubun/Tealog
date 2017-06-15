@@ -44,6 +44,7 @@ app.get('/entries/:id', (req, res) => {
 });
 
 app.post('/entries', (req, res) => {
+	console.log(req.body);
   const requiredFields = ['teaName', 'date'];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
@@ -56,7 +57,7 @@ app.post('/entries', (req, res) => {
 
   var vendor = req.body.vendor ? req.body.vendor : '';
   var teaColorTeaType = req.body.teaColorTeaType ? req.body.teaColorTeaType : '';
-  var flavoredTeaType = req.flavoredTeaType ? req.flavoredTeaType : false;
+  var flavoredTeaType = req.body.flavoredTeaType ? req.body.flavoredTeaType : false;
   var additions = req.body.additions ? req.body.additions : {};
   var creamAdditions = req.body.creamAdditions ? req.body.creamAdditions : false;
   var sugarAdditions = req.body.sugarAdditions ? req.body.sugarAdditions : false;
@@ -68,11 +69,10 @@ app.post('/entries', (req, res) => {
   var stars = req.body.stars ? req.body.stars : 0;
   var notes = req.body.notes ? req.body.notes : '';
 
-
   Entry
     .create({
     	teaName: req.body.teaName,
-    	date: moment(req.body.date).format("ddd, MMM Do YYYY, h:mm a"),
+    	date: req.body.date,
     	vendor: vendor,
     	teaColorTeaType: teaColorTeaType,
     	flavoredTeaType: flavoredTeaType,

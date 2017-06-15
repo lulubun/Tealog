@@ -7,7 +7,7 @@
 body {
   background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
   background-size: cover;
-  font-family: 'Lora';
+  font-family: 'Lora' !important;
 
 }
 
@@ -16,15 +16,15 @@ main {
 }
 
 div.leftTab {
-	position: fixed;
-	top: 0;
-	left 0;
- 	border: 1px solid #ccc;
-  background-color: #6f7eb4;
-  width: 10%;
-	height: 100%;
-	text-align: center;
-	padding-top: 2%;
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+ 	/*border: 1px solid #ccc !important;*/
+  background-color: #007991 !important;
+  width: 10% !important;
+	height: 100% !important;
+	text-align: center !important;
+	padding-top: 2% !important;
 }
 
 .writtenEntry {
@@ -34,14 +34,14 @@ div.leftTab {
 }
 
 .form-entries {
-  padding-left: 1%;
-  padding-right: 1%;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 5px;
-	display: block;
+  padding-left: 1% !important;
+  padding-right: 1% !important;
+  padding-top: 1% !important;
+  padding-bottom: 1% !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-radius: 5px !important;
+	display: block !important;
 
 }
 
@@ -165,7 +165,13 @@ h2 {
 }
 
 .additions {
-  padding-bottom: 0px;
+  padding-bottom: 10px;
+}
+
+.checkAdds {
+	border: 0.1px solid #ccc;
+	border-radius: 5px;
+	padding-left: 10px;
 }
 
 #date {
@@ -176,83 +182,117 @@ h2 {
 .selected {
 }
 
+.rating {
+  /*text-align: center;*/
+  /*perspective: 250px;*/
+  /*position: absolute;*/
+  /*top: 40%;*/
+  width: 100%;
+}
+/*
+.rating span {
+  cursor: pointer;
+  font-size: 50px;
+  padding: 0 10px;
+  color: #fff;
+  opacity: .5;
+  transition: all 150ms;
+  display: inline-block;
+  transform: rotateX(45deg);
+  transform-origin: center bottom;
+}
+
+.rating span.hover {
+  color: #007991;
+  opacity: 1;
+  transform: rotateX(0deg);
+  text-shadow: 0 0 30px #ffc;
+}
+
+.rating span.choice {
+  color: #007991;
+  opacity: 1;
+  transform: rotateX(0deg);
+  text-shadow: 0 0 30px #ffc;
+}*/
+
 /*Star Rating Styling*/
 
-form.stars {
-  width: 200px;
-  display: inline;
-  unicode-bidi: bidi-override;
-  direction: rtl;
+/*form.stars {
+  width: 200px !important;
+  display: inline !important;
+  unicode-bidi: bidi-override !important;
+  direction: rtl !important;
 }
 
 
 div.stars {
-  width: 200px;
-  display: inline;
-  unicode-bidi: bidi-override;
-  direction: rtl;
+  width: 200px !important;
+  display: inline !important;
+  unicode-bidi: bidi-override !important;
+  direction: rtl !important;
 }
 
 input.star {
-	display: none;
+	display: none !important;
 }
 
 label.star {
-  float: center;
-  padding: 10px;
-  font-size: 27px;
-  color: black;
-   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-   -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color: #FD4;
-  transition: all .2s;
+  float: center !important;
+  padding: 10px !important;
+  font-size: 27px !important;
+  color: black !important;
+   -webkit-text-fill-color: white !important; /* Will override color (regardless of order) */
+   /*-webkit-text-stroke-width: 1px !important;
+   -webkit-text-stroke-color: #FD4 !important;
+  transition: all .2s !important;
 }
 
 input.star:checked ~ label.star:before {
-  content: "\2605";
-  color: white;
-  -webkit-text-fill-color: #FD4; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 0px;
-  font-family: FontAwesome;
-  transition: all .25s;
+  content: "\2605" !important;
+  color: white !important;
+  -webkit-text-fill-color: #FD4 !important;
+  -webkit-text-stroke-width: 0px !important;
+  font-family: FontAwesome !important;
+  transition: all .25s !important;
 }
 
 input.star-5:checked ~ label.star:before {
-  color: white;
-  -webkit-text-fill-color: #FE7; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 0px;
-  text-shadow: 0 0 30px #952;
+  color: white !important;
+  -webkit-text-fill-color: #FE7 !important;
+  -webkit-text-stroke-width: 0px !important;
+  text-shadow: 0 0 30px #952 !important;
 }
 
 input.star-1:checked ~ label.star:before {
-	color: #F62;
-	-webkit-text-fill-color: #F62;
-	-webkit-text-stroke-width: 0px;
+	color: #F62 !important;
+	-webkit-text-fill-color: #F62 !important;
+	-webkit-text-stroke-width: 0px !important;
 }
 
 label.star:before {
-  content: "\2605";
-  font-family: FontAwesome;
-}
+  content: "\2605" !important;
+  font-family: FontAwesome !important;
+}*/
 
 /*Dropdown list styling*/
 /* Dropdown Button */
 button {
-    background-color:black;
-    color: #D9C18C;
-    padding: 15px;
-    font-family: Lora;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-		width: 100px;
-		margin-left: 10px;
+  background-color: #444545 !important;
+  color: #FFF0D1 !important;
+  padding: 15px !important;
+  font-family: Lora !important;
+  border: none !important;
+  cursor: pointer !important;
+  border-radius: 50% !important;
+	width: 100px !important;
+	margin-left: 10px !important;
 }
 
 /* Dropdown button on hover & focus */
 button:hover, button:focus {
-    color: white;
-    background-color: #324795;
+    color: white !important;
+    background-color: #A09F9D !important;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -265,7 +305,7 @@ button:hover, button:focus {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #FFF0D1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -280,66 +320,84 @@ button:hover, button:focus {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {background-color: #A09F9D}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 
 .check {
-  -webkit-appearance: none;
-  background-color: #fafafa;
-  border: 1px solid #cacece;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-  padding: 9px;
-  border-radius: 3px;
-  display: inline-block;
-  position: relative;
+  /*-webkit-appearance: none !important;
+  background-color: #fafafa !important;
+  border: 1px solid #cacece !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05) !important;
+  padding: 9px !important;
+  border-radius: 3px !important;
+  display: inline-block !important;
+  position: relative !important;*/
 }
 
 .check:active, .check:checked:active {
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  /*box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1) !important;*/
 }
 
 .check:checked {
-  background-color: #e9ecee;
-  border: 1px solid #adb8c0;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-  color: #99a1a7;
+  /*background-color: #e9ecee !important;
+  border: 1px solid #adb8c0 !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1) !important;
+  color: #99a1a7 !important;*/
 }
 
 .check:checked:after {
-  content: '\2714';
-  font-size: 14px;
-  position: absolute;
-  top: 0px;
-  left: 3px;
-  color: #99a1a7;
+  /*content: '\2714' !important;
+  font-size: 14px !important;
+  position: absolute !important;
+  top: 0px !important;
+  left: 3px !important;
+  color: #99a1a7 !important;*/
 }
 
 .dropbtn {
 	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: auto !important;
+	margin-right: auto !important;
 	margin-bottom: 20px;
+	margin-top: 20px !important;
 }
 
 .entryButton {
-	width: 98%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 20px;
+	width: 100%;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	margin-top: 20px !important;
+	background-color: #000000 !important;
+}
+
+.saveEditButton {
+	background-color: #000000 !important;
 }
 
 .goTopButton {
 	width: 98%;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: auto !important;
+	margin-right: auto !important;
 }
 
-input {
+input.check {
 	background-color: #f8f8f8;
 	border-radius: 4px;
 	border: 1px solid #ccc;
+	/*margin-bottom: 10px !important;*/
+	vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
+	/*width: 13px;*/
+	/*height: 13px;*/
+	margin-left: 5px;
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-right: 5px;
+	/*margin:0;*/
 }
 
 textarea {
@@ -365,4 +423,72 @@ button:active {
 	text-align: center;
 	font-weight: bold;
 	font-size: 25px;
+}
+
+/*.entries_list_space {
+	z-index: 2
+}*/
+
+label.lineUp {
+	display: block;
+	padding-left: 15px;
+	text-indent: -15px;
+}
+
+
+.modal {
+  display: none; /* Hidden by default */
+  /*position: fixed; /* Stay in place */*/
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+	right: 0;
+	bottom: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: scroll !important; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #FFF0D1 !important;
+  /*margin: 15% auto; /* 15% from the top and centered */*/
+  padding: 10px;
+  border: 1px solid #888;
+  width: 96%; /* Could be more or less, depending on screen size */
+	margin: auto;
+	overflow: scroll;
+}
+
+/* The Close Button */
+.close {
+	background-color: #A09F9D !important;
+	color: #FFF0D1 !important;
+	padding: 15px !important;
+	font-family: Lora !important;
+	border: none !important;
+	cursor: pointer !important;
+	border-radius: 50% !important;
+	width: 100px !important;
+  float: right;
+}
+
+.close:hover,
+.close:focus {
+	color: white !important;
+	background-color: #A09F9D !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#saveIt {
+	background-color: black !important;
+}
+
+.boxes {
+	-webkit-columns: 40px 2; /* Chrome, Safari, Opera */
+    -moz-columns: 40px 2; /* Firefox */
+    columns: 40px 2;
 }

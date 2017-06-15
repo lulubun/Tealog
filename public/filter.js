@@ -1,3 +1,11 @@
+function allEntries() {
+	$('#myDropdown').on('click', '.dropAll', function() {
+		$('.entries_list_space').html('');
+		$.getJSON('entries/');
+			displayAllEntries(data);
+	});
+}
+
 function blackEntries() {
 	$('#myDropdown').on('click', '.dropBlack', function() {
 		$('.entries_list_space').html('');
@@ -8,11 +16,11 @@ function blackEntries() {
 	    		data.forEach(function(item) {
     				if (item.teaColorTeaType==='Black') {
     					blackTeaEntries.push(item);
-    				}	
+    				}
     			});
 			};
 			displayAllEntries(blackTeaEntries);
-		}		
+		}
 	});
 }
 
@@ -26,11 +34,11 @@ function greenEntries() {
 	    		data.forEach(function(item) {
     				if (item.teaColorTeaType==='Green') {
     					greenTeaEntries.push(item);
-    				}	
+    				}
     			});
 			};
 			displayAllEntries(greenTeaEntries);
-		}		
+		}
 	});
 }
 
@@ -44,11 +52,11 @@ function whiteEntries() {
 	    		data.forEach(function(item) {
     				if (item.teaColorTeaType==='White') {
     					whiteTeaEntries.push(item);
-    				}	
+    				}
     			});
 			};
 			displayAllEntries(whiteTeaEntries);
-		}		
+		}
 	});
 }
 
@@ -62,11 +70,11 @@ function oolongEntries() {
 	    		data.forEach(function(item) {
     				if (item.teaColorTeaType==='Oolong') {
     					oolongTeaEntries.push(item);
-    				}	
+    				}
     			});
 			};
 			displayAllEntries(oolongTeaEntries);
-		}		
+		}
 	});
 }
 
@@ -80,11 +88,11 @@ function rooibosEntries() {
 	    		data.forEach(function(item) {
     				if (item.teaColorTeaType==='Rooibos') {
     					rooibosTeaEntries.push(item);
-    				}	
+    				}
     			});
 			};
 			displayAllEntries(rooibosTeaEntries);
-		}		
+		}
 	});
 }
 
@@ -98,11 +106,11 @@ function tisanEntries() {
 	    		data.forEach(function(item) {
     				if (item.teaColorTeaType==='Tisan (Herbal)') {
     					tisanTeaEntries.push(item);
-    				}	
+    				}
     			});
 			};
 			displayAllEntries(tisanTeaEntries);
-		}		
+		}
 	});
 }
 
@@ -116,10 +124,10 @@ function puerhEntries() {
 	    		data.forEach(function(item) {
     				if (item.teaColorTeaType==='Pu-erh') {
     					puerhTeaEntries.push(item);
-    				}	
+    				}
     			});
 			};
 			displayAllEntries(puerhTeaEntries);
-		}		
+		}
 	});
 }

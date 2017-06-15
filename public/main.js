@@ -27,84 +27,65 @@ function getAllEntries(callback) {
 function displayAllEntries(data) {
 	var allEntries = [];
     if (data) {
+      console.log(data);
     	$('.entries_list_space').html('');
     	var index = 0;
     	data.forEach(function(item) {
     		var oneRating = item.stars;
     		var oneEntry = '';
+        var flavoredChecked = item.flavoredTeaType ? 'checked' : '';
+        var creamChecked = item.creamAdditions ? 'checked' : '';
+        var sugarChecked = item.sugarAdditions ? 'checked' : '';
+        var honeyChecked = item.honeyAdditions ? 'checked' : '';
+        var lemonChecked = item.lemonAdditions ? 'checked' : '';
+
     		oneEntry +=
     		'<div class="writtenEntry" id="' + index + '">';
     		storeID[index] = item.id;
     		//console.log(index);
     		//console.log(storeID[index]);
     		index++;
-    		var numberDate = Date.parse(item.date);
-        console.log(numberDate);
-    		var prettyDate = Date(numberDate);
-        console.log(prettyDate);
     		oneEntry +=
-				'<p>' + prettyDate + '</p>' +
-				'<p>Tea Name: ' + item.teaName + '</p>' +
-				'<p>Vendor: ' + item.vendor + '</p>' +
+				'<h1>Tea Name: ' + item.teaName + '</h1>' +
+				'<h3>Vendor: ' + item.vendor + '</h3>' +
 				'<p>Type of Tea: ' + item.teaColorTeaType + '</p>' +
 				'<div class="flavored_entry">' +
-							'<input type="checkbox" class="flavored" value="flavored" id="flavored"> Flavored Tea' +
+							'<input type="checkbox" class="flavored" value="flavored" ' + flavoredChecked + ' disabled> Flavored Tea' +
 				'</div>' +
 				'<div class="entry additions">Additions<br>' +
 					'<div class="selected">' +
-						'<input class="select cream" type="checkbox" name="cream" value="cream" id="cream"> Cream<br>' +
-						'<input class="select sugar" type="checkbox" name="sugar" value="sugar" id="sugar"> Sugar<br>' +
-						'<input class="select honey" type="checkbox" name="honey" value="honey" id="honey"> Honey<br>' +
-						'<input class="select lemon" type="checkbox" name="lemon" value="lemon" id="lemon"> Lemon<br>' +
+						'<input class="select cream" type="checkbox" name="cream" value="cream" ' + creamChecked + ' disabled> Cream<br>' +
+						'<input class="select sugar" type="checkbox" name="sugar" value="sugar" ' + sugarChecked + ' disabled> Sugar<br>' +
+						'<input class="select honey" type="checkbox" name="honey" value="honey" ' + honeyChecked + ' disabled> Honey<br>' +
+						'<input class="select lemon" type="checkbox" name="lemon" value="lemon" ' + lemonChecked + ' disabled> Lemon<br>' +
 						'<p>Other: ' + item.otherAdditions + '</p>' +
 					'</div>' +
 				'</div>' +
 				'<p>Aroma: ' + item.aroma + '</p>' +
 				'<p>Taste: ' + item.taste + '</p>' +
-				'<div class="entry rating" id="rating">Star Rating <br>' +
-					'<form class="stars">';
-			var oneEntryStars = '';
-			for (var i = 0; i < 5; i++) {
-				var starNumber = 5 - i;
-				if (starNumber == item.stars) {
-					oneEntryStars += '<input class="star star-' + starNumber + '" disabled id="star-' + starNumber + '" type="radio" name="star" checked/>' +
-									'<label class="star star-' + starNumber + '" for="star-' + starNumber + '"></label>';
-				}
-				else {
-					oneEntryStars += '<input class="star star-' + starNumber + '" disabled id="star-' + starNumber + '" type="radio" name="star"/>' +
-									'<label class="star star-' + starNumber + '" for="star-' + starNumber + '"></label>';
-				}
-			}
-			oneEntry += oneEntryStars;
-			oneEntry += '</form>' +
+        '<p>Date: ' + item.date + '</p>' +
+				'<div class="entry rating">Star Rating <br/><br/>' +
+          '<div class="rateYo"></div>' +
 				'</div>' +
 				'<p>Notes: ' + item.notes + '</p>' +
 				'<div class="changeButtons">' +
-					'<button id="editButton" type="button">Edit</button> <button id="deleteButton" type="button">Delete</button>' +
+					'<button class="editButton" type="button">Edit</button> <button class="deleteButton" type="button">Delete</button>' +
 				'</div>' +
 				'<img class="border_scroll" src="fleur.png"/>' +
 			'</div>';
     	    $('.entries_list_space').append(oneEntry);
-    	    if (item.flavoredTeaType == true) {
-    	    	$('.flavored').attr('checked', true);
-    	    };
-    	    $('.flavored').prop('disabled', true)
-    	    if (item.creamAdditions == true) {
-    	    	$('.cream').attr('checked', true);
-    	    };
-    	    $('.cream').prop('disabled', true)
-    	    if (item.sugarAdditions == true) {
-    	    	$('.sugar').attr('checked', true);
-    	    };
-    	    $('.sugar').prop('disabled', true)
-    	    if (item.honeyAdditions == true) {
-    	    	$('.honey').attr('checked', true);
-    	    };
-    	    $('.honey').prop('disabled', true)
-    	    if (item.lemonAdditions == true) {
-    	    	$('.lemon').attr('checked', true);
-    	    };
-    	    $('.lemon').prop('disabled', true)
+          var starNumberReturn = item.stars;
+          $(function () {
+            $(".rateYo").rateYo({
+              rating: starNumberReturn,
+              readOnly: true,
+              multiColor: {
+
+                "startColor": "#FF0000", //RED
+                "endColor"  : "#007991"  //GREEN
+              }
+            });
+          });
     	});
     }
 }
@@ -115,183 +96,175 @@ function getAndDisplayAllEntries() {
     getAllEntries(displayAllEntries);
 }
 
-$(function() {
-    getAndDisplayAllEntries();
+// function startEntryForm() {
+//   var firstDate = new Date();
+//   var stringDate = firstDate.toString()
+//   var prettyDate = stringDate.slice(0, 15)
+// 	$('.entryButton').click(function(event) {
+// 		var newEntryForm = '<h2>New Tea Tasting Entry</h2>' +
+// 							'<form id="entry_form">' +
+// 								'<div class="form-entries">' +
+// 									'<div class="entry tea-name" > Tea Name ' +
+// 										'<input id="tea-name" type="text" name="tea name">' +
+// 									'</div>' +
+// 									'<div class="entry vendor">Vendor ' +
+// 										'<input type="text" name="vendor" id="vendor">' +
+// 									'</div>' +
+// 									'<div class="entry tea-type"> Tea Type ' +
+// 										'<input list="Colors" name="tea colors" id="color">' +
+// 										'<datalist id="Colors">' +
+//     										'<option value="Black">' +
+//     										'<option value="Green">' +
+//     										'<option value="White">' +
+//     										'<option value="Oolong">' +
+//     										'<option value="Rooibos">' +
+//     										'<option value="Tisan (Herbal)">' +
+//     										'<option value="Pu-erh">' +
+//     										'<option value="Other">' +
+//   										'</datalist>' +
+//   									'</div>' +
+// 									'<div class="entry flavored">' +
+// 										'<input class="check" type="checkbox" name="flavored" id="flavored"> Flavored Tea ' +
+// 									'</div>' +
+// 									'<div class="entry additions">Additions<br>' +
+// 										'<div class="selected">' +
+// 											'<input class="select check cream" type="checkbox" name="cream" value="cream" id="cream"> Cream<br>' +
+// 											'<input class="select check sugar" type="checkbox" name="sugar" value="sugar" id="sugar"> Sugar<br>' +
+// 											'<input class="select check honey" type="checkbox" name="honey" value="honey" id="honey"> Honey<br>' +
+// 											'<input class="select check lemon" type="checkbox" name="lemon" value="lemon" id="lemon"> Lemon<br>' +
+// 											'Other <input class="select other-text" type="text" name="other-text" id="other-text">' +
+// 										'</div>' +
+// 									'</div>' +
+// 									'<div class="entry aroma">Aroma ' +
+// 										'<input type="text" name="aroma" id="aroma">' +
+// 									'</div>' +
+// 									'<div class="entry taste">Taste ' +
+// 										'<input type="text" name="taste" id="taste">' +
+// 									'</div>' +
+// 									'<div class="entry rating" id="rating">Star Rating <br>' +
+// 										'<div class="stars">' +
+//     										'<input class="star star-5" id="star-5" type="radio" name="star" val=5/>' +
+//     										'<label class="star star-5" for="star-5"></label>' +
+//     										'<input class="star star-4" id="star-4" type="radio" name="star" val=4/>' +
+//     										'<label class="star star-4" for="star-4"></label>' +
+//     										'<input class="star star-3" id="star-3" type="radio" name="star" val=3/>' +
+//     										'<label class="star star-3" for="star-3"></label>' +
+//     										'<input class="star star-2" id="star-2" type="radio" name="star" val=2/>' +
+//     										'<label class="star star-2" for="star-2"></label>' +
+//     										'<input class="star star-1" id="star-1" type="radio" name="star" val=1/>' +
+//     										'<label class="star star-1" for="star-1"></label>' +
+// 										'</div>' +
+// 									'</div>' +
+//                   '<div class="entry date">Date ' +
+// 										'<input type="text" name="date" id="date">' +
+// 									'</div>' +
+// 									'<div class="entry notes">Notes ' +
+// 										'<textarea rows="4" cols="20" type="text" name="notes" id="notes"/>' +
+// 									'</div>' +
+// 									'<div class="submit">' +
+// 										'<button class="submitButton" type="button">Save Entry</button>' +
+//                     '<button class="cancelButton" type="button">Cancel</button>' +
+// 									'</div>' +
+// 								'</div>' +
+// 							'</form>';
+// 		$('.entries_list_space').html(newEntryForm);
+// 		document.getElementById("date").defaultValue = prettyDate;
+// 			$(function() {
+// 				captureEntryForm();
+// 			});
+// 	})
+//
+// };
+
+// $('input:checkbox').on('click', function(e) {
+//
+//     // prevents the event from bubbling up the DOM tree
+//     // eg the modal from cancelling the event
+//     e.stopImmediatePropagation();
+//
+//     var checked = (e.currentTarget.checked) ? false : true;
+//     e.currentTarget.checked=(checked) ? false : checked.toString();
+// });
+//
+// $(document).delegate('#flavored', 'click', function(event){
+//   if ($('#flavored').is(':checked')){
+//     console.log('checked flavored');
+//     flavoredCheckVal = true
+//   }
+// })
+//
+// $(document).ready(function () {
+//     //Search the parent class, id, or tag and then try to find the <a id="addMore"></a>  as a child
+//     $('.modal #flavored').on('click', function () {
+//         console.log('addMore click event');
+//     });
+// });
+
+var starCheckVal = 0;
+
+$('.stars').on('click', '#rateYo', function() {
+  starCheckVal = $("#rateYo").rateYo("option", "rating"); //returns 50
+
+  console.log(starCheckVal);
 })
 
-function startEntryForm() {
-	$('.entryButton').click(function(event) {
-		var newEntryForm = '<h2>New Tea Tasting Entry</h2>' +
-							'<form id="entry_form">' +
-								'<div class="form-entries">' +
-									'<div class="entry date">Date ' +
-										'<input type="text" name="date" id="date">' +
-									'</div>' +
-									'<div class="entry tea-name" > Tea Name ' +
-										'<input id="tea-name" type="text" name="tea name">' +
-									'</div>' +
-									'<div class="entry vendor">Vendor ' +
-										'<input type="text" name="vendor" id="vendor">' +
-									'</div>' +
-									'<div class="entry tea-type"> Tea Type ' +
-										'<input list="Colors" name="tea colors" id="color">' +
-										'<datalist id="Colors">' +
-    										'<option value="Black">' +
-    										'<option value="Green">' +
-    										'<option value="White">' +
-    										'<option value="Oolong">' +
-    										'<option value="Rooibos">' +
-    										'<option value="Tisan (Herbal)">' +
-    										'<option value="Pu-erh">' +
-    										'<option value="Other">' +
-  										'</datalist>' +
-  									'</div>' +
-									'<div class="entry flavored">' +
-										'<input class="check" type="checkbox" name="flavored" id="flavored"> Flavored Tea ' +
-									'</div>' +
-									'<div class="entry additions">Additions<br>' +
-										'<div class="selected">' +
-											'<input class="select check cream" type="checkbox" name="cream" value="cream" id="cream"> Cream<br>' +
-											'<input class="select check sugar" type="checkbox" name="sugar" value="sugar" id="sugar"> Sugar<br>' +
-											'<input class="select check honey" type="checkbox" name="honey" value="honey" id="honey"> Honey<br>' +
-											'<input class="select check lemon" type="checkbox" name="lemon" value="lemon" id="lemon"> Lemon<br>' +
-											'Other <input class="select other-text" type="text" name="other-text" id="other-text">' +
-										'</div>' +
-									'</div>' +
-									'<div class="entry aroma">Aroma ' +
-										'<input type="text" name="aroma" id="aroma">' +
-									'</div>' +
-									'<div class="entry taste">Taste ' +
-										'<input type="text" name="taste" id="taste">' +
-									'</div>' +
-									'<div class="entry rating" id="rating">Star Rating <br>' +
-										'<div class="stars">' +
-    										'<input class="star star-5" id="star-5" type="radio" name="star" val=5/>' +
-    										'<label class="star star-5" for="star-5"></label>' +
-    										'<input class="star star-4" id="star-4" type="radio" name="star" val=4/>' +
-    										'<label class="star star-4" for="star-4"></label>' +
-    										'<input class="star star-3" id="star-3" type="radio" name="star" val=3/>' +
-    										'<label class="star star-3" for="star-3"></label>' +
-    										'<input class="star star-2" id="star-2" type="radio" name="star" val=2/>' +
-    										'<label class="star star-2" for="star-2"></label>' +
-    										'<input class="star star-1" id="star-1" type="radio" name="star" val=1/>' +
-    										'<label class="star star-1" for="star-1"></label>' +
-										'</div>' +
-									'</div>' +
-									'<div class="entry notes">Notes ' +
-										'<textarea rows="4" cols="20" type="text" name="notes" id="notes"/>' +
-									'</div>' +
-									'<div class="submit">' +
-										'<button class="submitButton" type="button">Save Entry</button>' +
-                    '<button class="cancelButton" type="button">Cancel</button>' +
-									'</div>' +
-								'</div>' +
-							'</form>';
-		$('.new_entry_form_space').html(newEntryForm);
-		document.getElementById("date").defaultValue = Date();
-			$(function() {
-				captureEntryForm();
-			});
-	})
-
-};
-
-
 function captureEntryForm() {
-	$('.submitButton').click(function(event) {
 		event.preventDefault();
-		var flavoredCheckVal;
-		if ($('#flavored').is(':checked')) {
+		var flavoredCheckVal = false,
+    creamCheckVal = false,
+    sugarCheckVal = false,
+    honeyCheckVal = false,
+    lemonCheckVal = false;
+
+		if ($('#flavored').prop('checked')) {
 			flavoredCheckVal = true
-		} else {
-			flavoredCheckVal = false
-		};
-		var creamCheckVal;
-		if ($('#cream').is(':checked')) {
+		}
+		if ($('#cream').prop('checked')) {
 			creamCheckVal = true
-		} else {
-			creamCheckVal = false
-		};
-		var sugarCheckVal;
+		}
 		if ($('#sugar').is(':checked')) {
 			sugarCheckVal = true
-		} else {
-			sugarCheckVal = false
-		};
-		var honeyCheckVal;
+		}
 		if ($('#honey').is(':checked')) {
 			honeyCheckVal = true
-		} else {
-			honeyCheckVal = false
-		};
-		var lemonCheckVal;
+		}
 		if ($('#lemon').is(':checked')) {
 			lemonCheckVal = true
-		} else {
-			lemonCheckVal = false
-		};
-		var starCheckVal;
-		if ($('#star-5').is(':checked')) {
-			starCheckVal = 5
-		} else if ($('#star-4').is(':checked')) {
-			starCheckVal = 4
-		} else if ($('#star-3').is(':checked')) {
-			starCheckVal = 3
-		} else if ($('#star-2').is(':checked')) {
-			starCheckVal = 2
-		} else if ($('#star-1').is(':checked')) {
-			starCheckVal = 1
-		} else {
-			starCheckVal = 0
-		};
-     	var newEntry = {
-    		teaName: $("#tea-name").val(),
-    		date: $("#date").val(),
-		    vendor: $("#vendor").val(),
-		    teaColorTeaType: $("#color").val(),
-		    flavoredTeaType: flavoredCheckVal,
-		    creamAdditions: creamCheckVal,
-		    sugarAdditions: sugarCheckVal,
-		    honeyAdditions: honeyCheckVal,
-		    lemonAdditions: lemonCheckVal,
-		    otherAdditions: $("#other-text").val(),
-		    aroma: $("#aroma").val(),
-		    taste: $("#taste").val(),
-		    stars: starCheckVal,
-		    notes:$("#notes").val()
-     	};
-     	console.log(JSON.stringify(newEntry));
-      	$.ajax({
-    		method: 'POST',
-    		url: '/entries',
-    		data: JSON.stringify(newEntry),
-    		success: function(json) {
-      			  if(!json.error) location.reload(true);
-    		},
-    		error: function() {
-    			alert('You must include a Tea Name')
-    		},
-    		dataType: 'json',
-    		contentType: 'application/json'
-    	});
-	});
-};
-
-function starsEntries() {
-	$('#myDropdown').on('click', '.dropStars', function() {
-		$('.entries_list_space').html('');
-		$.getJSON('entries/?stars=5', getStarsEntries);
-		function getStarsEntries(data) {
-			displayAllEntries(data);
 		}
-	});
-}
 
-$(function() {
-	starsEntries();
-});
-
-
+   	var newEntry = {
+  		teaName: $("#tea-name").val(),
+  		date: $("#date").val(),
+	    vendor: $("#vendor").val(),
+	    teaColorTeaType: $("#color").val(),
+	    flavoredTeaType: flavoredCheckVal,
+	    creamAdditions: creamCheckVal,
+	    sugarAdditions: sugarCheckVal,
+	    honeyAdditions: honeyCheckVal,
+	    lemonAdditions: lemonCheckVal,
+	    otherAdditions: $("#other-text").val(),
+	    aroma: $("#aroma").val(),
+	    taste: $("#taste").val(),
+	    stars: starCheckVal,
+	    notes:$("#notes").val()
+   	};
+    console.log(newEntry);
+   	console.log(JSON.stringify(newEntry));
+  	$.ajax({
+  		method: 'POST',
+  		url: '/entries',
+  		data: JSON.stringify(newEntry),
+  		success: function(json) {
+    		if(!json.error) location.reload(true);
+  		},
+  		error: function(json) {
+  			alert('Error: Failed to create new entry')
+        console.log(json.error);
+  		},
+  		dataType: 'json',
+  		contentType: 'application/json'
+  	});
+};
 
 function blackEntries() {
 	$('#myDropdown').on('click', '.dropBlack', function() {
@@ -363,34 +336,40 @@ function puerhEntries() {
 	});
 }
 
-$(function() {
-    startEntryForm(captureEntryForm());
-});
+// $(function() {
+//     startEntryForm(captureEntryForm());
+// });
 
 $(function() {
+  getAndDisplayAllEntries();
+  whiteEntries();
+  oolongEntries();
+  rooibosEntries();
+  tisanEntries();
+  puerhEntries();
 	blackEntries();
+  greenEntries();
+  addDate();
 });
 
-$(function() {
-	greenEntries();
+$(function () {
+
+  $("#rateYo").rateYo({
+    halfStar: true,
+    multiColor: {
+
+      "startColor": "#FF0000", //RED
+      "endColor"  : "#007991"  //GREEN
+    }
+  });
+
+
+
 });
 
-$(function() {
-	whiteEntries();
-});
-
-$(function() {
-	oolongEntries();
-});
-
-$(function() {
-	rooibosEntries();
-});
-
-$(function() {
-	tisanEntries();
-});
-
-$(function() {
-	puerhEntries();
-});
+function addDate(){
+  var firstDate = new Date();
+  var stringDate = firstDate.toString()
+  var prettyDate = stringDate.slice(0, 15)
+  $('#date').val(prettyDate)
+}

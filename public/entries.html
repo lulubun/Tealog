@@ -7,15 +7,20 @@
   	<link rel="stylesheet" type="text/css" href="float_grid.css">
   	<link href='//fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
 		<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 	<title>Aficionado: TeaLog</title>
 </head>
 <body>
-
-	<div class="leftTab">
-		<img src="./teaset.png" alt="teaset" class="teasetSm">
-		<div class="dropdown">
-			<button onclick="dropList()" class="dropbtn" "tablinks">Filter By</button>
-			<div id="myDropdown" class="dropdown-content">
+	<div class="container">
+		<div class="leftTab">
+			<img src="./teaset.png" alt="teaset" class="teasetSm">
+			<button type="button" class="entryButton" id="modalButton" data-toggle="modal" data-target="#myModal">New Entry</button>
+			<div class="dropdown">
+				<button onclick="dropList()" class="dropbtn" "tablinks">Filter By</button>
+				<div id="myDropdown" class="dropdown-content">
+					<a href="#" class="dropAll">All Teas</a>
 		    	<a href="#" class="dropBlack">Black Teas</a>
 		    	<a href="#" class="dropGreen">Green Teas</a>
 		    	<a href="#" class="dropWhite">White Teas</a>
@@ -24,22 +29,104 @@
 		    	<a href="#" class="dropTisan">Tisan (Herbal) Teas</a>
 		    	<a href="#" class="dropPuerh">Pu-erh Teas</a>
 		    	<!--<a href="#" class="dropStars">Teas with 4+ Stars</a>-->
-		  </div>
+			  </div>
+			</div>
+			<button class="goTopButton" onclick="window.scrollTo(0, 0)">Top of Log</button>
 		</div>
-		<button class="entryButton">New Entry</button>
-		<button class="goTopButton">Top of Log</button>
+		<main>
+			<h1 class="firstTitle textOnly" id="teaTitle">Aficionado: Tea Log Page <img src="./teaset.png" alt="teaset" class="teaset"/></h1>
+			<div class="entries_list_space"></div>
+		  <!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-content">
+	        <div class="modal-header">
+	          <button class="close" data-dismiss="modal">&times;</button>
+	          <h3 class="modal-title">New Tea Tasting Entry</h3>
+	        </div>
+	        <div class="modal-body">
+						<form id="entry_form">
+							<div class="form-entries">
+								<div class="entry tea-name" >Tea Name
+									<br/>
+									<input id="tea-name" type="text" name="tea name"/>
+								</div>
+								<div class="entry vendor">Vendor
+									<br/>
+									<input type="text" name="vendor" id="vendor"/>
+								</div>
+								<div class="entry tea-type"> Tea Type
+									<br/>
+									<input list="Colors" name="tea colors" id="color"/>
+									<datalist id="Colors">
+										<option value="Black"/>
+										<option value="Green"/>
+										<option value="White"/>
+										<option value="Oolong"/>
+										<option value="Rooibos"/>
+										<option value="Tisan (Herbal)"/>
+										<option value="Pu-erh"/>
+										<option value="Other"/>
+									</datalist>
+								</div>
+								<br/>
+								<div class="entry flavored">
+									<input type="checkbox" name="flavored" id="flavored"/>&nbsp;&nbsp;Flavored Tea
+								</div>
+								<div class="entry additions checkAdds"><h4>Additions</h4>
+									<br/>
+									<div class="selected">
+										<div class="boxes">
+											<label class="lineUp"><input class="check" type="checkbox" name="cream" id="cream"/>&nbsp;&nbsp;Cream </label><br/>
+											<label class="lineUp"><input class="check" type="checkbox" name="sugar" id="sugar"/>&nbsp;&nbsp;Sugar </label><br/>
+											<label class="lineUp"><input class="check" type="checkbox" name="honey" id="honey"/>&nbsp;&nbsp;Honey </label><br/>
+											<label class="lineUp"><input class="check" type="checkbox" name="lemon" id="lemon"/>&nbsp;&nbsp;Lemon </label><br/>
+										</div>
+										Other
+										<br/>
+										<input class="select other-text" type="text" name="other-text" id="other-text"/>
+									</div>
+								</div>
+								<div class="entry aroma">Aroma
+									<br/>
+									<input type="text" name="aroma" id="aroma"/>
+								</div>
+								<div class="entry taste">Taste
+									<br/>
+									<input type="text" name="taste" id="taste"/>
+								</div>
+								<div class="entry stars">Star Rating <br/>
+									<div id="rateYo"></div>
+								</div>
+				        <div class="entry date">Date
+									<br/>
+									<input type="text" name="date" id="date"/>
+								</div>
+								<div class="entry notes">Notes
+									<br/>
+									<textarea rows="4" cols="20" type="text" name="notes" id="notes"></textarea>
+								</div>
+								<div class="submit">
+									<button onclick="captureEntryForm()" class="submitButton" id="saveIt" type="button">Save Entry</button>
+								</div>
+							</div>
+						</form>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" id="cancelModal" class="close" data-dismiss="modal">Cancel</button>
+	        </div>
+	      </div>
+		  </div>
+		</main>
 	</div>
-
-<main>
-<div class="firstTitle underline">
-	<h1 class="firstTitle textOnly" id="teaTitle">Aficionado: Tea Log Page <img src="./teaset.png" alt="teaset" class="teaset"></h1>
-</div>
-<div class="new_entry_form_space"></div>
-<div class="entries_list_space"></div>
-</main>
+</body>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="main.js" type="text/javascript"></script>
 <script src="filter.js" type="text/javascript"></script>
 <script src="edit.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
 </body>
 </html>
