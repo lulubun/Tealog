@@ -1,10 +1,10 @@
-function allEntries() {
-	$('#myDropdown').on('click', '.dropAll', function() {
-		$('.entries_list_space').html('');
-		$.getJSON('entries/');
-			displayAllEntries(data);
-	});
-}
+// function allEntries() {
+// 	$('#myDropdown').on('click', '.dropAll', function() {
+// 		$('.entries_list_space').html('');
+// 		$.getJSON('entries/');
+// 			displayAllEntries(data);
+// 	});
+// }
 
 function blackEntries() {
 	$('#myDropdown').on('click', '.dropBlack', function() {

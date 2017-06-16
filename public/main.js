@@ -266,6 +266,12 @@ function captureEntryForm() {
   	});
 };
 
+function allEntries() {
+	$('#myDropdown').on('click', '.dropAll', function() {
+	  getAndDisplayAllEntries();
+  })
+}
+
 function blackEntries() {
 	$('#myDropdown').on('click', '.dropBlack', function() {
 		$('.entries_list_space').html('');
@@ -350,6 +356,7 @@ $(function() {
 	blackEntries();
   greenEntries();
   addDate();
+  allEntries();
 });
 
 $(function () {

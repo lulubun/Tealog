@@ -382,6 +382,13 @@ button:hover, button:focus {
 	margin-right: auto !important;
 }
 
+.homeButton {
+	width: 98%;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	margin-top: 20px !important;
+}
+
 input.check {
 	background-color: #f8f8f8;
 	border-radius: 4px;
