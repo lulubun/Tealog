@@ -11,9 +11,9 @@
 ```
 ### Launching
 ```
->   npm start
+>   nodemon server.js
 ```
-Then open [`localhost:8000`](http://localhost:8000) in a browser.
+Then open [`localhost:8080`](http://localhost:8080) in a browser.
 
 <h2>Introduction</h2>
 <p>This project was inspired by my love of tea. Just like high quality coffee, tea comes in many varieties and flavors that are often unknown here in the United States. Becoming more aware of what kind and the quality of the tea you drink requires you to pay close attention each time you taste a new tea.</p>
