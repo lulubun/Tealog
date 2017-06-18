@@ -1,5 +1,4 @@
 var storeID = {};
-// var moment = require('moment');
 
 function dropList() {
     document.getElementById("myDropdown").classList.toggle("show");

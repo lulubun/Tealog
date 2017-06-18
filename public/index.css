@@ -1,12 +1,42 @@
 @media (max-width: 650px) {
-	.Intro {
-		width: 100%;
-		position: relative;
+	body {
+		background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
+		background-size: cover;
 	}
 
-	#pourVid {
-		height: 10%;
+	.Intro {
+		/*position: relative;*/
+		font-size: 10px;
+		text-align: center;
+		margin-left: 0 !important;
+		margin-right: 80px;
+
 	}
+
+	#title {
+		font-size: 30px !important;
+	}
+
+	.blur {
+		display: none;
+	}
+
+	.info {
+		padding-left: 0;
+	}
+}
+
+@media (max-width: 1000px) and (min-width: 651px) {
+	.info {
+		margin-right: 30%;
+		margin-left: 0;
+	}
+
+	#title {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+
 }
 
 #pourVid {
