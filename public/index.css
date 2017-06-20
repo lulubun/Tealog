@@ -1,42 +1,5 @@
-@media (max-width: 650px) {
-	body {
-		background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
-		background-size: cover;
-	}
-
-	.Intro {
-		/*position: relative;*/
-		font-size: 10px;
-		text-align: center;
-		margin-left: 0 !important;
-		margin-right: 80px;
-
-	}
-
-	#title {
-		font-size: 30px !important;
-	}
-
-	.blur {
-		display: none;
-	}
-
-	.info {
-		padding-left: 0;
-	}
-}
-
-@media (max-width: 1000px) and (min-width: 651px) {
-	.info {
-		margin-right: 30%;
-		margin-left: 0;
-	}
-
-	#title {
-		margin-bottom: 0;
-		margin-top: 0;
-	}
-
+#openImg {
+	display: none;
 }
 
 #pourVid {
@@ -79,4 +42,62 @@
 
 a {
 	text-decoration: none;
+}
+
+.hideCell {
+	display: none;
+}
+
+@media (max-width: 650px) {
+	body {
+		background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/02/Light-Parchment-Texture.jpg");
+		background-size: cover;
+	}
+
+	.Intro {
+		/*position: relative;*/
+		font-size: 15px;
+		text-align: center;
+
+	}
+
+	#title {
+		font-size: 50px;
+	}
+
+	#openImg {
+		display: inline;
+		width: 100%;
+	}
+
+	.blur {
+		display: none;
+	}
+
+	.info {
+		padding-top: 50%;
+		padding-left: 10%;
+		padding-right: 10%;
+	}
+
+	.hideFull {
+		display: none;
+	}
+
+	.hideCell {
+		display: inline;
+	}
+}
+
+@media (max-width: 1000px) and (min-width: 651px) {
+	.info {
+		margin-right: 30%;
+		margin-left: 0;
+	}
+
+	#title {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+
 }

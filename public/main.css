@@ -72,17 +72,11 @@ h2 {
 	position: relative;
 }
 
-@media only screen and (max-width: 1050px) {
-	.teaset {
-		display: none;
-	}
-}
-
 
 @media only screen and (max-width: 640px) {
 
 	.changeButtons {
-		text-align: center;
+		text-align: left;
 	}
 
 	.border_scroll {
@@ -99,20 +93,24 @@ h2 {
 		width: 100%;
 	}
 
-	.dropbtn {
-		width: auto;
-	}
-
-	.entryButton {
-		width: auto;
-	}
-
-	.goTopButton {
-		width: auto;
-	}
-
 	.leftTab {
 		display: none;
+	}
+
+	.mobileBar {
+		display: block;
+	}
+
+	#mobileModalButton {
+		display: block !important;
+		margin-top: 0 !important;
+		width: 100% !important;
+		border-radius: 0 !important;
+	}
+
+	button {
+		width: 50px !important;
+		font-size: 0.5em !important;
 	}
 }
 
@@ -133,6 +131,18 @@ h2 {
 
 	.leftTab {
 		display: none;
+	}
+
+	#mobileModalButton {
+		display: block !important;
+		margin-top: 0 !important;
+		width: 100% !important;
+		border-radius: 0 !important;
+	}
+
+	button {
+		width: 75px !important;
+		font-size: 0.75em !important;
 	}
 }
 
@@ -183,97 +193,8 @@ h2 {
 }
 
 .rating {
-  /*text-align: center;*/
-  /*perspective: 250px;*/
-  /*position: absolute;*/
-  /*top: 40%;*/
   width: 100%;
 }
-/*
-.rating span {
-  cursor: pointer;
-  font-size: 50px;
-  padding: 0 10px;
-  color: #fff;
-  opacity: .5;
-  transition: all 150ms;
-  display: inline-block;
-  transform: rotateX(45deg);
-  transform-origin: center bottom;
-}
-
-.rating span.hover {
-  color: #007991;
-  opacity: 1;
-  transform: rotateX(0deg);
-  text-shadow: 0 0 30px #ffc;
-}
-
-.rating span.choice {
-  color: #007991;
-  opacity: 1;
-  transform: rotateX(0deg);
-  text-shadow: 0 0 30px #ffc;
-}*/
-
-/*Star Rating Styling*/
-
-/*form.stars {
-  width: 200px !important;
-  display: inline !important;
-  unicode-bidi: bidi-override !important;
-  direction: rtl !important;
-}
-
-
-div.stars {
-  width: 200px !important;
-  display: inline !important;
-  unicode-bidi: bidi-override !important;
-  direction: rtl !important;
-}
-
-input.star {
-	display: none !important;
-}
-
-label.star {
-  float: center !important;
-  padding: 10px !important;
-  font-size: 27px !important;
-  color: black !important;
-   -webkit-text-fill-color: white !important; /* Will override color (regardless of order) */
-   /*-webkit-text-stroke-width: 1px !important;
-   -webkit-text-stroke-color: #FD4 !important;
-  transition: all .2s !important;
-}
-
-input.star:checked ~ label.star:before {
-  content: "\2605" !important;
-  color: white !important;
-  -webkit-text-fill-color: #FD4 !important;
-  -webkit-text-stroke-width: 0px !important;
-  font-family: FontAwesome !important;
-  transition: all .25s !important;
-}
-
-input.star-5:checked ~ label.star:before {
-  color: white !important;
-  -webkit-text-fill-color: #FE7 !important;
-  -webkit-text-stroke-width: 0px !important;
-  text-shadow: 0 0 30px #952 !important;
-}
-
-input.star-1:checked ~ label.star:before {
-	color: #F62 !important;
-	-webkit-text-fill-color: #F62 !important;
-	-webkit-text-stroke-width: 0px !important;
-}
-
-label.star:before {
-  content: "\2605" !important;
-  font-family: FontAwesome !important;
-}*/
 
 /*Dropdown list styling*/
 /* Dropdown Button */
@@ -286,37 +207,37 @@ button {
   cursor: pointer !important;
   border-radius: 50% !important;
 	width: 100px !important;
-	margin-left: 10px !important;
+	/*margin-left: 10px !important;*/
 }
 
 /* Dropdown button on hover & focus */
 button:hover, button:focus {
-    color: white !important;
-    background-color: #A09F9D !important;
+  color: white !important;
+  background-color: #A09F9D !important;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #FFF0D1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  background-color: #FFF0D1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 /* Change color of dropdown links on hover */
@@ -357,9 +278,9 @@ button:hover, button:focus {
 }
 
 .dropbtn {
-	width: 100%;
-	margin-left: auto !important;
-	margin-right: auto !important;
+	/*width: 150%;
+	margin-left: -20px !important;
+	margin-right: auto !important;*/
 	margin-bottom: 20px;
 	margin-top: 20px !important;
 }
@@ -380,6 +301,7 @@ button:hover, button:focus {
 	width: 98%;
 	margin-left: auto !important;
 	margin-right: auto !important;
+	font-size: 0.8em;
 }
 
 .homeButton {
@@ -498,4 +420,32 @@ label.lineUp {
 	-webkit-columns: 40px 2; /* Chrome, Safari, Opera */
     -moz-columns: 40px 2; /* Firefox */
     columns: 40px 2;
+}
+
+#mobileModalButton {
+	display: none;
+}
+
+@media only screen and (max-width: 1050px) {
+	.teaset {
+		display: none;
+	}
+
+	button {
+		width: 75px !important;
+		font-size: 0.75em !important;
+	}
+}
+
+
+.hideMe {
+	display: none;
+}
+
+#entryIdHolder {
+	display: none;
+}
+
+.starHide {
+	display: none;
 }

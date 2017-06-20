@@ -20,6 +20,8 @@ function blackEntries() {
     			});
 			};
 			displayAllEntries(blackTeaEntries);
+			$('#allTeaBtn').removeClass('hideMe');
+
 		}
 	});
 }
@@ -38,6 +40,8 @@ function greenEntries() {
     			});
 			};
 			displayAllEntries(greenTeaEntries);
+			$('#allTeaBtn').removeClass('hideMe');
+
 		}
 	});
 }
@@ -56,6 +60,8 @@ function whiteEntries() {
     			});
 			};
 			displayAllEntries(whiteTeaEntries);
+			$('#allTeaBtn').removeClass('hideMe');
+
 		}
 	});
 }
@@ -74,6 +80,8 @@ function oolongEntries() {
     			});
 			};
 			displayAllEntries(oolongTeaEntries);
+			$('#allTeaBtn').removeClass('hideMe');
+
 		}
 	});
 }
@@ -92,6 +100,8 @@ function rooibosEntries() {
     			});
 			};
 			displayAllEntries(rooibosTeaEntries);
+			$('#allTeaBtn').removeClass('hideMe');
+
 		}
 	});
 }
@@ -110,6 +120,8 @@ function tisanEntries() {
     			});
 			};
 			displayAllEntries(tisanTeaEntries);
+			$('#allTeaBtn').removeClass('hideMe');
+
 		}
 	});
 }
@@ -128,6 +140,8 @@ function puerhEntries() {
     			});
 			};
 			displayAllEntries(puerhTeaEntries);
+			$('#allTeaBtn').removeClass('hideMe');
+
 		}
 	});
 }
